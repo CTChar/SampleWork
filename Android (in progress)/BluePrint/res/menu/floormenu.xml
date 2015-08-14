@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/floorOne" android:enabled="true" android:titleCondensed="f1" android:orderInCategory="1" android:visible="true" android:title="Floor One"></item>
+    <item android:id="@+id/floorTwo" android:orderInCategory="2" android:titleCondensed="f2" android:title="Floor Two" android:enabled="true" android:visible="true"></item>
+    <item android:id="@+id/floorThree" android:enabled="true" android:titleCondensed="f3" android:visible="true" android:title="Floor Three" android:orderInCategory="3"></item>
+    
+
+</menu>

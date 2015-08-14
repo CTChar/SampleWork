@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <FrameLayout
+        android:id="@+id/bluePrintFrame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="200dp"
+        android:layout_marginRight="25dp"
+        android:background="@color/BluePrintBlue" >
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/paletteLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="700dp"
+        android:background="@color/Grey"
+        android:visibility="visible" >
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/newFrame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="225dp"
+        android:layout_marginRight="25dp"
+        android:background="@color/White"
+        android:visibility="invisible" >
+
+        <Button
+            android:id="@+id/confirmNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="200dp"
+            android:onClick="confirmNew"
+            android:text="@string/create" />
+
+        <TextView
+            android:id="@+id/width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/width" />
+
+        <TextView
+            android:id="@+id/length"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="100dp"
+            android:text="@string/length" />
+
+        <TextView
+            android:id="@+id/floors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="150dp"
+            android:text="@string/floors" />
+
+        <EditText
+            android:id="@+id/widthText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="35dp"
+            android:ems="5"
+            android:inputType="number"
+            android:textSize="15sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/lengthText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="85dp"
+            android:ems="5"
+            android:inputType="number"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/floorsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="75dp"
+            android:layout_marginTop="135dp"
+            android:ems="5"
+            android:inputType="number"
+            android:textSize="15sp" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/newButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        android:onClick="startNew"
+        android:text="@string/newBlue" />
+
+</FrameLayout>
