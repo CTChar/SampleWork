@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Comment" rowHeight="200" id="KGk-i7-Jjw" customClass="CommentTableViewCell" customModule="OpenTrack" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qa2-NP-wFI">
+                        <rect key="frame" x="8" y="8" width="304" height="184"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qa2-NP-wFI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="VHI-cn-Z3g"/>
+                    <constraint firstItem="qa2-NP-wFI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="khM-Fn-g7n"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="qa2-NP-wFI" secondAttribute="trailing" id="tJd-au-zgO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="qa2-NP-wFI" secondAttribute="bottom" id="yc9-QC-gvx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="comments" destination="qa2-NP-wFI" id="6X9-ch-cIX"/>
+            </connections>
+            <point key="canvasLocation" x="547" y="469"/>
+        </tableViewCell>
+    </objects>
+</document>
