@@ -7,6 +7,8 @@ Version: __1.0__
 
 ***
 
+NOTE: C++ algorithm NOT written by me. Written by Chad Aeschliman of Spensa Technologies.
+
 
 ### Installation
 
