@@ -2,18 +2,18 @@
 //  ViewFrameKeyboardInsetController.swift
 //  MyTraps
 //
-//  Created by Jacob Rhoda on 5/23/16.
+//  Created by Cole Herzog on 5/23/16.
 //  Copyright © 2016 Spensa Technologies. All rights reserved.
 //
 
 import UIKit
 
 @objc class ViewFrameKeyboardInsetController: NSObject, MTKeyboardInsetController {
-    private(set) var observing: Bool = false
+    fileprivate(set) var observing: Bool = false
     let observedView: UIView
     let anchorView: UIView
     
-    private var oldFrame: CGRect?
+    fileprivate var oldFrame: CGRect?
     
     /// This assumes anchorView is a direct descendant of view.
     required init(view: UIView, anchorView: UIView) {
@@ -33,7 +33,7 @@ import UIKit
     
         observing = true
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.dynamicType.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(type(of: self).keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     func endObserving() {
@@ -43,43 +43,43 @@ import UIKit
     
         observing = false
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         oldFrame = self.observedView.frame
         
         handleKeyboardWillTransitionToSize(notification)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.dynamicType.handleKeyboardWillTransitionToSize(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.dynamicType.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(type(of: self).handleKeyboardWillTransitionToSize(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(type(of: self).keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         if let info = notification.userInfo,
-            frame = oldFrame,
-            animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
-            UIView.animateWithDuration(animationDuration, animations: {
+            let frame = oldFrame,
+            let animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            UIView.animate(withDuration: animationDuration, animations: {
                 self.observedView.frame = frame
             })
         }
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillChangeFrameNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.dynamicType.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(type(of: self).keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    func handleKeyboardWillTransitionToSize(notification: NSNotification) {
+    func handleKeyboardWillTransitionToSize(_ notification: Notification) {
         if let info = notification.userInfo,
-            kbFrame = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue(),
-            animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
+            let kbFrame = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let animationDuration = (info[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue {
             let yValue = kbFrame.height
             let anchorFrame = anchorView.frame
             let maxAnchorY = observedView.bounds.height - anchorFrame.maxY // window coordinates
             
             var frame = self.observedView.frame
             frame.origin.y = min(0, maxAnchorY - yValue)
-            UIView.animateWithDuration(animationDuration, animations: { 
+            UIView.animate(withDuration: animationDuration, animations: { 
                 self.observedView.frame = frame
             })
         }
@@ -89,6 +89,6 @@ import UIKit
 protocol MTKeyboardInsetController: class {
     func beginObserving()
     func endObserving()
-    func handleKeyboardWillTransitionToSize(notification: NSNotification)
+    func handleKeyboardWillTransitionToSize(_ notification: Notification)
 }
 

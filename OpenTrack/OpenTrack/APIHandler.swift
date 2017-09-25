@@ -7,12 +7,10 @@
 //
 
 import Foundation
-import GoogleAPIClientForREST
-import GTMOAuth2
 
 class APIHander {
     
-    private let kKeychainItemName = "Google Sheets API"
-    private let kClientID = "819718754543-lshsqgeol7qs4a5b6s51frg5b9ln65q0.apps.googleusercontent.com"
+    fileprivate let kKeychainItemName = "Google Sheets API"
+    fileprivate let kClientID = "819718754543-lshsqgeol7qs4a5b6s51frg5b9ln65q0.apps.googleusercontent.com"
 
 }

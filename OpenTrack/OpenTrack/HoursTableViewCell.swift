@@ -14,7 +14,7 @@ class HoursTableViewCell: UITableViewCell {
     var hours: Int {
         get {
             if let text = hoursField.text,
-                hours = Int(text) {
+                let hours = Int(text) {
                 return hours
             } else {
                 return 40
@@ -24,7 +24,7 @@ class HoursTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        hoursField.keyboardType = .NumberPad
+        hoursField.keyboardType = .numberPad
     }
     
 }

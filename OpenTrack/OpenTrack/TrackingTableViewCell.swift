@@ -17,13 +17,13 @@ class TrackingTableViewCell: UITableViewCell, UITextFieldDelegate {
             project.text = projectReport.project.rawValue
             
             if projectReport.project == .Blank {
-                time.userInteractionEnabled = false
-                time.textColor = UIColor.grayColor()
-                remove.hidden = true
+                time.isUserInteractionEnabled = false
+                time.textColor = UIColor.gray
+                remove.isHidden = true
             } else {
-                time.userInteractionEnabled = true
-                time.textColor = UIColor.blackColor()
-                remove.hidden = false
+                time.isUserInteractionEnabled = true
+                time.textColor = UIColor.black
+                remove.isHidden = false
             }
             
             delegate?.didChangeProjectReportForProject(self, projectReport: projectReport)
@@ -35,28 +35,28 @@ class TrackingTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet var project: UILabel!
     
     override func awakeFromNib() {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
+        let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(
             self,
             selector: #selector(textFieldTextChanged(_:)),
-            name:UITextFieldTextDidChangeNotification,
+            name:NSNotification.Name.UITextFieldTextDidChange,
             object: nil
         )
         
         time.delegate = self
-        time.keyboardType = .NumberPad
+        time.keyboardType = .numberPad
         super.awakeFromNib()
     }
     
-    @IBAction func removeHit(sender: AnyObject) {
+    @IBAction func removeHit(_ sender: AnyObject) {
         delegate?.didRemoveProjectReport(self)
     }
     
-    func textFieldTextChanged(sender : AnyObject) {
+    func textFieldTextChanged(_ sender : AnyObject) {
         let plainText: String? = time.text
         
         if let text: String = plainText,
-            numberValue: Int = Int(text) {
+            let numberValue: Int = Int(text) {
             projectReport.time = numberValue
         } else {
             time.text = "0"
@@ -64,11 +64,11 @@ class TrackingTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         let plainText: String? = time.text
         
         if let text: String = plainText,
-            numberValue: Int = Int(text) {
+            let numberValue: Int = Int(text) {
             if numberValue == 0 {
                 time.text = ""
             }
@@ -78,6 +78,6 @@ class TrackingTableViewCell: UITableViewCell, UITextFieldDelegate {
 }
 
 protocol TrackingCellDelegate: class {
-    func didChangeProjectReportForProject(trackingCell: TrackingTableViewCell, projectReport: ProjectReport)
-    func didRemoveProjectReport(trackingCell: TrackingTableViewCell)
+    func didChangeProjectReportForProject(_ trackingCell: TrackingTableViewCell, projectReport: ProjectReport)
+    func didRemoveProjectReport(_ trackingCell: TrackingTableViewCell)
 }

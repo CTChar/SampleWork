@@ -18,9 +18,9 @@ class NameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        if let first = defaults.objectForKey("first") as? String,
-            last = defaults.objectForKey("last") as? String {
+        let defaults = UserDefaults.standard
+        if let first = defaults.object(forKey: "first") as? String,
+            let last = defaults.object(forKey: "last") as? String {
             
             if first != "" {
                 firstName.text = first
@@ -32,27 +32,27 @@ class NameViewController: UIViewController {
         }
     }
 
-    @IBAction func warningHit(sender: AnyObject) {
-        disclaimer.hidden = !disclaimer.hidden
+    @IBAction func warningHit(_ sender: AnyObject) {
+        disclaimer.isHidden = !disclaimer.isHidden
         view.endEditing(true)
     }
     
-    @IBAction func continueHit(sender: AnyObject) {
+    @IBAction func continueHit(_ sender: AnyObject) {
         if let first = firstName.text,
-            last = lastName.text {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(first, forKey: "first")
-            defaults.setObject(last, forKey: "last")
+            let last = lastName.text {
+            let defaults = UserDefaults.standard
+            defaults.set(first, forKey: "first")
+            defaults.set(last, forKey: "last")
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let nextView = segue.destinationViewController as? TrackingViewController else {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let nextView = segue.destination as? TrackingViewController else {
             fatalError("This isn't a tracking view controller, and you're not a nice person.")
         }
         
         if let first = firstName.text,
-            last = lastName.text {
+            let last = lastName.text {
             nextView.firstName = first
             nextView.lastName = last
         } else {
@@ -60,7 +60,7 @@ class NameViewController: UIViewController {
         }
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if firstName.text != "" && lastName.text != "" {
             return true
         } else {
